@@ -4,10 +4,13 @@ body {
 
 .hlink {
     text-decoration: none;
-    color: black;
 }
 
-.hlink:hover {
-    text-decoration: none;
+a:hover {
     color: #0B5ED7;
+}
+
+a{
+    color: black;
+    text-decoration: none;
 }

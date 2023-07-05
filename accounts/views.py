@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
+from .forms import OrderForm
 from .models import *
 
 
@@ -36,3 +37,41 @@ def customers(request, pk):
         'orders_total': orders_total
     }
     return render(request, 'accounts/customer.html', context=context)
+
+def createOrder(request):    
+    form = OrderForm()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'accounts/order_form.html', context=context)
+
+def updateOrder(request, pk):
+    # Get the order
+    order = Order.objects.get(id=pk)
+    form = OrderForm(instance=order)
+
+    # Save the order into the same instance
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'accounts/order_form.html', context=context)
+
+def deleteOrder(request, pk):
+    order = Order.objects.get(id=pk)
+
+
+    if request.method == 'POST':
+        order.delete()
+        return redirect('/')
+    context = {'order': order}
+    return render(request, 'accounts/delete.html', context=context)
+
+    
