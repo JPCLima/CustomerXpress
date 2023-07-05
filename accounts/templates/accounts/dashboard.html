@@ -60,10 +60,10 @@
                     <th>Phone</th>
                 </tr>
 
-                {% for i in customers  %}
-                <tr>
-                    <td>{{i.name}}</td>
-                    <td>{{i.phone}}</td>
+                {% for customer in customers  %}
+                <tr>                    
+                    <td><a class="hlink" href="{% url 'customers' customer.id %}">{{customer.name}}</a></td>
+                    <td>{{customer.phone}}</td>
                 </tr>
                 {% endfor %}
                 

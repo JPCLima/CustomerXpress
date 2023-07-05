@@ -1,3 +1,13 @@
 body {
     background-color: #ebeff5;
     }
+
+.hlink {
+    text-decoration: none;
+    color: black;
+}
+
+.hlink:hover {
+    text-decoration: none;
+    color: #0B5ED7;
+}
