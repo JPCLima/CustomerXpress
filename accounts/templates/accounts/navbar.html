@@ -1,3 +1,12 @@
+{% load static %}
+
+<style>
+  .username {
+    font-size: 15px;    
+    margin-right: 30px;
+  }
+</style>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="{%url 'home'%}">CustomerXpress</a>
@@ -15,4 +24,9 @@
         </ul>
       </div>
     </div>
+
+    <span class='username'>{{request.user}}</span>
+    <span class='username'><a href="{% url 'logout' %}">Logout</a></span>
+
+
   </nav>
