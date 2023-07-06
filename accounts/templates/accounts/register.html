@@ -1,0 +1,44 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="card p-4">
+      <div class="card-body">
+        <h1 class="card-title">Register Account</h1>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="form-group p-2">
+            <input type="text" name="{{ form.username.name }}" class="form-control" placeholder="Username">
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="{{ form.email.name }}" class="form-control" placeholder="Email">
+          </div>
+          <div class="form-group p-2">
+            <input type="password" name="{{ form.password1.name }}" class="form-control col-md-6" placeholder="Password">
+          </div>
+          <div class="form-group p-2">
+            <input type="password" name="{{ form.password2.name }}" class="form-control" placeholder="Confirm Password">
+          </div>
+          <div class="form-group p-2 text-center">
+            <button class="btn btn-primary" type="submit">Register</button>
+            <p>Already have an account? <a href="{% url 'login'%}">Login</a></p>
+          </div>
+        </form>   
+        {% if form.errors %}
+        <div class="alert alert-danger">
+          <ul>
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}   
+      </div>
+    </div>
+  </div>
+  
+  
+  
+{% endblock content %}

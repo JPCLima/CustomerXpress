@@ -6,36 +6,56 @@
     <div class="col-md">
         <div class="card mb-3">
             <div class="card-header text-center">
-                <h5 class="card-title">Customer information</h5>
+                <h5 class="card-title">Customer Details</h5>
             </div>
             <div class="card-body">
                 <p><strong>Name: </strong>{{customer.name}}</p>
                 <p><strong>Email: </strong> {{customer.email}}</p>
                 <p><strong>Phone: </strong>{{customer.phone}}</p>
                 <p><strong>Address: </strong>{{customer.address}}</p>
-                <a href="#" class="btn btn-outline-primary btn-sm ">Update</a>
-                <a href="#" class="btn btn-outline-danger btn-sm ">Delete</a>
+       
             </div>
         </div>
     </div>
 
     <div class="col-md">
-        <div class="card text-center mb-3">
-            <div class="card-header">
-                <h5 class="card-title">Total Orders</h5>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{orders_total}}</h5>
-            </div>
-        </div>  
+        <div class="row">
+            <div class="card text-center mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">Total Orders</h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{orders_total}}</h5>    
+                </div>
+            </div>  
+        </div>
+        <div class="row">
+            <div class="card text-center mb-3">
+                <div class="card-header">
+                    <h5 class="card-title">Customer Actions</h5>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="btn btn-outline-primary btn-sm ">Update Details</a>
+                    <a href="{% url 'create_order' customer.id %}" class="btn btn-outline-primary btn-sm ">New Orders</a>
+                </div>           
+        </div>
+    </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col">
         <div class="card card-body">
-            <form method="get">
+            
+            <form method="get" >
+                <small>Product  </small>{{filter.form.product }}
+                <small>Status  </small>{{filter.form.status }}
+                <small>Start Date  </small>{{filter.form.start_date }}
+                <small>End Date  </small>{{filter.form.end_date }}
+                <small>Note </small>{{filter.form.note }}
+               
                 <button class="btn btn-primary" type="submit">Search</button>
+         
             </form>
         </div>
     </div>
@@ -51,6 +71,7 @@
                     <th>Category</th>
                     <th>Date Order</th>
                     <th>Status</th>
+                    <th>Note</th>
                     <th>Update</th>
                     <th>Remove</th>
                 </tr>
@@ -60,6 +81,7 @@
                     <td>{{order.product.category}}</td>
                     <td>{{order.date_created}}</td>
                     <td>{{order.status}}</td>
+                    <td>{{order.note}}</td>
                     <td>
                         <a href="#" class="btn btn-outline-primary btn-sm ">Update</a>
                     <td>

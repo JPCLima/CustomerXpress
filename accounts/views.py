@@ -1,7 +1,42 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 
-from .forms import OrderForm
+from .filters import OrderFilter
+from .forms import CreateUserForm, OrderForm
 from .models import *
+
+
+def registerPage(request):
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, f'User created successfully {user}')
+            return redirect('login')
+
+    context = {'form': form}
+    
+    return render(request, 'accounts/register.html', context=context)
+
+def loginPage(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'Username or password incorrect')
+
+    context = {}
+    return render(request, 'accounts/login.html', context=context)
 
 
 def home(request):
@@ -31,22 +66,28 @@ def customers(request, pk):
     customer = Customer.objects.get(id=pk)
     orders = customer.order_set.all()
     orders_total = orders.count()
+
+    customFilter = OrderFilter(request.GET, queryset=orders)
+    orders = customFilter.qs
+
     context = {
         'customer': customer,
         'orders': orders,
-        'orders_total': orders_total
+        'orders_total': orders_total,
+        'filter': customFilter
     }
     return render(request, 'accounts/customer.html', context=context)
 
-def createOrder(request):    
-    form = OrderForm()
+def createOrder(request, pk):    
+    customer = Customer.objects.get(pk=pk)
+    form = OrderForm(initial={'customer': customer})
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
 
-    context = {'form': form}
+    context = {'form': form, 'customer': customer}
     return render(request, 'accounts/order_form.html', context=context)
 
 def updateOrder(request, pk):

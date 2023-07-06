@@ -1,13 +1,17 @@
 from django.urls import path
 
-from .views import (createOrder, customers, deleteOrder, home, products,
-                    updateOrder)
+from .views import (createOrder, customers, deleteOrder, home, loginPage,
+                    products, registerPage, updateOrder)
 
 urlpatterns = [
+    path('login/', loginPage, name='login'),
+    path('register/', registerPage, name='register'),
+
     path('', home, name='home'),
     path('products/', products, name='products'),
+
     path('customers/<str:pk>', customers, name='customers'),
-    path('create_order/', createOrder, name='create_order'),
+    path('create_order/<str:pk>', createOrder, name='create_order'),
     path('update_order/<str:pk>', updateOrder, name='update_order'),
     path('delete_order/<str:pk>', deleteOrder, name='delete_order'),
 ]

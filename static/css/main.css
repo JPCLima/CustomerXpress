@@ -14,3 +14,7 @@ a{
     color: black;
     text-decoration: none;
 }
+
+#id_start_date, #id_end_date{
+    width: 100px;
+}
