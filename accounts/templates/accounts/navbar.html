@@ -8,12 +8,15 @@
 </style>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  
     <div class="container-fluid">
       <a class="navbar-brand" href="{%url 'home'%}">CustomerXpress</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      {% if request.user.is_authenticated %}
       <div class="collapse navbar-collapse" id="navbarNav">
+        {% if request.user.is_staff %}
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{%url 'home'%}">Dashboard</a>
@@ -22,11 +25,15 @@
             <a class="nav-link" href="{%url 'products'%}">Products</a>
           </li>
         </ul>
+        {% endif %}
       </div>
+      {% endif %}
     </div>
 
-    <span class='username'>{{request.user}}</span>
-    <span class='username'><a href="{% url 'logout' %}">Logout</a></span>
-
+    {% if request.user.is_authenticated %}
+      <span class='username'>{{request.user}}</span>
+      <span class='username'><a href="{% url 'logout' %}">Logout</a></span>
+    {% endif %}
+    
 
   </nav>
