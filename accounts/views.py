@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 
 from .decorators import admin_only, allowed_users, unauthorized_user
 from .filters import OrderFilter
-from .forms import CreateUserForm, OrderForm
+from .forms import CreateUserForm, CustomerForm, OrderForm
 from .models import *
 
 
@@ -22,6 +22,17 @@ def registerPage(request):
             # Add the group customer account type
             group = Group.objects.get(name='customer')
             user.groups.add(group)
+
+            # Create a Customer object and link it to the user
+            customer = Customer.objects.create(user=user, name=username)
+
+            # Save additional customer data
+            customer.phone = form.cleaned_data.get('phone')
+            customer.email = form.cleaned_data.get('email')
+            customer.address = form.cleaned_data.get('address')
+
+            # Save fields to Customer object
+            customer.save()
 
             messages.success(request, f'User created successfully {username}')
             return redirect('login')
@@ -50,9 +61,36 @@ def logoutPage(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
 def userPage(request):
-    context = {}
+    orders = request.user.customer.order_set.all()
+    orders_total = orders.count()
+    orders_delivered = orders.filter(status='Delivered').count()
+    orders_pending = orders.filter(status='Pending').count()
+    context = {
+        'orders': orders,
+        'orders_total': orders_total,
+        'orders_delivered': orders_delivered,
+        'orders_pending': orders_pending
+        }
     return render(request, 'accounts/user.html', context=context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def account_settings(request):
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=customer)
+        print(form.is_valid())
+        if form.is_valid():
+            form.save()
+            return redirect('userPage')
+
+    context = {'form': form}
+    return render(request, 'accounts/account_settings.html', context=context)
 
 
 @login_required(login_url='login')
