@@ -5,21 +5,23 @@
 <br>
 <div class="row">
     <div class="card card-body">
-        <h5>New order for: {{customer.name}}</h5>
+        <h5>New order for: {{customer}}</h5>
         <form action="" method="POST">
             <table class="table table-sm">
                 {% csrf_token %}
                 <tr>
                     <th>Product</th>
                     <th>Status</th>
+                    <th>Note</th>
                     <th></th>
                 </tr>
                 <tr>
 
                     <td>{{form.product}}</td>
                     <td>{{form.status}}</td>
+                    <td>{{form.note}}</td>
                     <td><input class="btn btn-outline-primary btn-sm " type="submit" name="Submit">
-                    <a href="{% url 'customers' customer.id  %}">Cancel</a>
+                    <a href="{% url 'home'  %}">Cancel</a>
                     
                     </td>
                 </tr>

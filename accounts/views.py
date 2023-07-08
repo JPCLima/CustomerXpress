@@ -157,17 +157,24 @@ def createOrder(request, pk):
 def updateOrder(request, pk):
     # Get the order
     order = Order.objects.get(id=pk)
+    customer = order.customer
     form = OrderForm(instance=order)
 
-    # Save the order into the same instance
     if request.method == 'POST':
-        form = OrderForm(request.POST, instance=order)
+        mutable_post = request.POST.copy()  
+        mutable_post['customer'] = customer.id 
+        form = OrderForm(mutable_post, instance=order)
+        print(form.is_valid())
         if form.is_valid():
             form.save()
             return redirect('/')
+        else:
+            print(form.errors)
+        
 
-    context = {'form': form}
+    context = {'form': form, 'customer':order.customer}
     return render(request, 'accounts/order_form.html', context=context)
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])

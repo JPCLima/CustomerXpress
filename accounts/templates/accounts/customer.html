@@ -83,9 +83,9 @@
                     <td>{{order.status}}</td>
                     <td>{{order.note}}</td>
                     <td>
-                        <a href="#" class="btn btn-outline-primary btn-sm ">Update</a>
+                        <a href="{% url 'update_order' order.id%}" class="btn btn-outline-primary btn-sm ">Update</a>
                     <td>
-                        <a href="#" class="btn btn-outline-danger btn-sm ">Delete</a>
+                        <a href="{% url 'delete_order' order.id%}" class="btn btn-outline-danger btn-sm ">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
