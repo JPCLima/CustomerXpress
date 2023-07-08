@@ -20,6 +20,7 @@
 
     <div class="col-md">
         <div class="row">
+            <div class="col-md">
             <div class="card text-center mb-3">
                 <div class="card-header">
                     <h5 class="card-title">Total Orders</h5>
@@ -28,17 +29,20 @@
                     <h5 class="card-title">{{orders_total}}</h5>    
                 </div>
             </div>  
+            </div>  
         </div>
         <div class="row">
-            <div class="card text-center mb-3">
-                <div class="card-header">
-                    <h5 class="card-title">Customer Actions</h5>
+            <div class="col-md">
+                <div class="card text-center mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">Customer Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-outline-primary btn-sm ">Update Details</a>
+                        <a href="{% url 'create_order' customer.id %}" class="btn btn-outline-primary btn-sm ">New Orders</a>
+                    </div>           
                 </div>
-                <div class="card-body">
-                    <a href="#" class="btn btn-outline-primary btn-sm ">Update Details</a>
-                    <a href="{% url 'create_order' customer.id %}" class="btn btn-outline-primary btn-sm ">New Orders</a>
-                </div>           
-        </div>
+            </div>
     </div>
     </div>
 </div>

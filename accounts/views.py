@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 
 from .decorators import admin_only, allowed_users, unauthorized_user
@@ -102,9 +103,10 @@ def home(request):
     orders_total = orders.count()
     orders_delivered = orders.filter(status='Delivered').count()
     orders_pending = orders.filter(status='Pending').count()
+
     context = {
-        'orders': orders,
-        'customers': customers,
+        'orders': orders[:8],
+        'customers': customers[:8],
         'orders_total': orders_total,
         'orders_delivered': orders_delivered,
         'orders_pending': orders_pending,
@@ -146,7 +148,9 @@ def createOrder(request, pk):
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            form.save()
+            order = form.save(commit=False)
+            order.customer = customer 
+            order.save()
             return redirect('/')
 
     context = {'form': form, 'customer': customer}
@@ -160,6 +164,7 @@ def updateOrder(request, pk):
     customer = order.customer
     form = OrderForm(instance=order)
 
+    # Save the order into the same instance
     if request.method == 'POST':
         mutable_post = request.POST.copy()  
         mutable_post['customer'] = customer.id 
@@ -174,6 +179,30 @@ def updateOrder(request, pk):
 
     context = {'form': form, 'customer':order.customer}
     return render(request, 'accounts/order_form.html', context=context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def customers_view(request):
+    customers = Customer.objects.all()
+
+    p_customers = Paginator(customers, 7)
+    page_c = request.GET.get('customers_page')
+    customers = p_customers.get_page(page_c)
+
+    context = {'customers': customers}
+    return render(request, 'accounts/customers_page.html', context=context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def orders_view(request):
+    orders = Order.objects.all()
+
+    p_orders = Paginator(orders, 7)
+    page_o = request.GET.get('orders_page')
+    orders = p_orders.get_page(page_o)
+
+    context = {'orders': orders}
+    return render(request, 'accounts/orders_page.html', context=context)
 
 
 @login_required(login_url='login')
