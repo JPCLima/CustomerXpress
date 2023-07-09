@@ -21,4 +21,5 @@ urlpatterns = [
 
     path('customers/', customers_view, name='customers_view'),
     path('orders/', orders_view, name='orders_view'),
+    path('orders/<str:status>/', orders_view, name='filtered_orders_view'),
 ]

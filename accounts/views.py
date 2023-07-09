@@ -194,8 +194,11 @@ def customers_view(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def orders_view(request):
+def orders_view(request, status=None):
     orders = Order.objects.all()
+
+    if status:
+        orders = orders.filter(status=status)
 
     p_orders = Paginator(orders, 7)
     page_o = request.GET.get('orders_page')

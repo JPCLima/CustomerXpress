@@ -10,7 +10,7 @@
         <div class="col-md">
             <div class="card text-center mb-3">
                 <div class="card-header">
-                    <h5 class="card-title">Total Orders</h5>
+                    <h5 class="card-title"><a href="{% url 'orders_view'%}">Total Orders</a></h5>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{orders_total}}</h5>
@@ -23,7 +23,7 @@
         <div class="col-md">
             <div class="card text-center mb-3">
                 <div class="card-header">
-                    <h5 class="card-title">Orders Delivered</h5>
+                    <h5 class="card-title"><a href="{% url 'filtered_orders_view' 'Delivered' %}">Orders Delivered</a></h5>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{orders_delivered}}</h5>
@@ -36,7 +36,7 @@
         <div class="col-md">
             <div class="card text-center mb-3">
                 <div class="card-header">
-                    <h5 class="card-title">Orders Pending</h5>
+                    <h5 class="card-title"><a href="{% url 'filtered_orders_view' 'Pending' %}">Orders Pending</a></h5>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{orders_pending}}</h5>
@@ -70,7 +70,7 @@
             </table>
             <button type="button" class="btn btn-outline-secondary">
                 <a class="hlink" href="{% url 'customers_view'%}">
-                    See all customers
+                    See all customers...
                 </a>
             </button>
         </div>
@@ -102,7 +102,7 @@
             </table>
             <button type="button" class="btn btn-outline-secondary">
                 <a class="hlink" href="{% url 'orders_view'%}">
-                    See all customers
+                    See all orders...
                 </a>
             </button>
 
