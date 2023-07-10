@@ -4,7 +4,13 @@
 <div class="d-flex justify-content-center align-items-center mt-5">
     <div class="card p-4">
       <div class="card-body">
-        <h1 class="card-title">Register Account</h1>
+        <div class="logo">
+          <span class="logo-text">Customer<span class="highlight">Xpress</span></span>
+        </div>
+        <br>
+        <div class="card-title">          
+        <h5>Register Account</h5>
+      </div>
         <form action="" method="POST">
           {% csrf_token %}
           <div class="form-group p-2">
@@ -20,7 +26,7 @@
             <input type="password" name="{{ form.password2.name }}" class="form-control" placeholder="Confirm Password">
           </div>
           <div class="form-group p-2 text-center">
-            <button class="btn btn-primary" type="submit">Register</button>
+            <button class="btn btn-custom" type="submit">Register</button>
             <p>Already have an account? <a href="{% url 'login'%}">Login</a></p>
           </div>
         </form>   

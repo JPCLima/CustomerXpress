@@ -21,6 +21,9 @@
             <h5 class="card-title">Account Settings</h5>
             <hr>
             <img class="profile-pic" src="{{request.user.customer.profile_pic.url }}" alt="profile-picture">
+            <br>
+            <p style="text-align: center;font-weight: 700;">{{ customer.name }}</p>
+
         </div>
     </div>    
     <div class="col-md-9">
@@ -47,7 +50,7 @@
             <input type="file" name="{{ form.profile_pic.name }}" id="{{ form.profile_pic.id_for_label }}" class="form-control-file">
       
            
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-custom btn-sm">Submit</button>
           </form>
         </div>
     </div>    

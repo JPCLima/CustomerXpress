@@ -1,3 +1,4 @@
+
 body {
     background-color: #ebeff5;
     }
@@ -6,8 +7,12 @@ body {
     text-decoration: none;
 }
 
+.principal-color {
+    color: #3b5bdb;
+}
+
 a:hover {
-    color: #0B5ED7;
+    color: #3b5bdb;;
 }
 
 a{
@@ -15,10 +20,17 @@ a{
     text-decoration: none;
 }
 
-a:hover{
-    color:black;
-}
 
 #id_start_date, #id_end_date{
     width: 100px;
+}
+
+/* Pagination */  
+.custom-pagination .page-item.active .page-link {
+    background-color: #3b5bdb; 
+    border-color: #3b5bdb; 
+    color: #fff;
+}
+.custom-pagination .page-link{
+    color: #3b5bdb
 }

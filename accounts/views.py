@@ -90,7 +90,7 @@ def account_settings(request):
             form.save()
             return redirect('userPage')
 
-    context = {'form': form}
+    context = {'form': form, 'customer':customer}
     return render(request, 'accounts/account_settings.html', context=context)
 
 

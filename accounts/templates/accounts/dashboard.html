@@ -68,7 +68,7 @@
                 {% endfor %}                
 
             </table>
-            <button type="button" class="btn btn-outline-secondary">
+            <button type="button" class="btn btn-custom-inv">
                 <a class="hlink" href="{% url 'customers_view'%}">
                     See all customers...
                 </a>
@@ -100,36 +100,11 @@
 
                 
             </table>
-            <button type="button" class="btn btn-outline-secondary">
+            <button type="button" class="btn btn-custom-inv">
                 <a class="hlink" href="{% url 'orders_view'%}">
                     See all orders...
                 </a>
             </button>
-
-
-            {% comment %} <nav aria-label="Page navigation">
-                <ul class="pagination pagination-sm">
-                  {% if orders_page.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page={{ orders_page.previous_page_number }}">Previous</a></li>
-                  {% else %}
-                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
-                  {% endif %}
-              
-                  {% for num in orders_page.paginator.page_range %}
-                    {% if num == orders_page.number %}
-                      <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                    {% else %}
-                      <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
-                  {% endfor %}
-              
-                  {% if orders_page.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ orders_page.next_page_number }}">Next</a></li>
-                  {% else %}
-                    <li class="page-item disabled"><span class="page-link">Next</span></li>
-                  {% endif %}
-                </ul>
-            </nav> {% endcomment %}
               
         </div>        
     </div>

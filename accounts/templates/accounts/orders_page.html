@@ -28,7 +28,7 @@
             <td>{{order.status}}</td>
             <td>{{order.note}}</td>
             <td>
-                <a href="{% url 'update_order' order.id%}" class="btn btn-outline-primary btn-sm ">Update</a>
+                <a href="{% url 'update_order' order.id%}" class="btn btn-custom-inv  btn-sm ">Update</a>
             <td>
                 <a href="{% url 'delete_order' order.id%}" class="btn btn-outline-danger btn-sm ">Delete</a>
             </td>
@@ -39,7 +39,7 @@
     </table>
 
       <nav aria-label="Page navigation">
-        <ul class="pagination pagination-sm">
+        <ul class="pagination pagination-sm custom-pagination ">
           {% if orders.has_previous %}
             <li class="page-item">
               <a class="page-link" href="?orders_page={{ orders.previous_page_number }}">Previous</a>

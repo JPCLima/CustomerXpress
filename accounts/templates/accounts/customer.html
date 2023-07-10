@@ -37,9 +37,8 @@
                     <div class="card-header">
                         <h5 class="card-title">Customer Actions</h5>
                     </div>
-                    <div class="card-body">
-                        <a href="#" class="btn btn-outline-primary btn-sm ">Update Details</a>
-                        <a href="{% url 'create_order' customer.id %}" class="btn btn-outline-primary btn-sm ">New Orders</a>
+                    <div class="card-body">                        
+                        <a href="{% url 'create_order' customer.id %}" class="btn btn-custom btn-sm ">New Orders</a>
                     </div>           
                 </div>
             </div>
@@ -58,9 +57,12 @@
                 <small>End Date  </small>{{filter.form.end_date }}
                 <small>Note </small>{{filter.form.note }}
                
-                <button class="btn btn-primary" type="submit">Search</button>
+                <button class="btn btn-custom btn-sm" type="submit">Search</button>
          
             </form>
+
+
+              
         </div>
     </div>
 </div>
@@ -87,7 +89,7 @@
                     <td>{{order.status}}</td>
                     <td>{{order.note}}</td>
                     <td>
-                        <a href="{% url 'update_order' order.id%}" class="btn btn-outline-primary btn-sm ">Update</a>
+                        <a href="{% url 'update_order' order.id%}" class="btn btn-custom-inv btn-sm ">Update</a>
                     <td>
                         <a href="{% url 'delete_order' order.id%}" class="btn btn-outline-danger btn-sm ">Delete</a>
                     </td>
