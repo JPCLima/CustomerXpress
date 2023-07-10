@@ -2,6 +2,8 @@
 
 CustomerXpress is a CRM (Customer Relationship Management) web application built using Django. It allows businesses to manage customer information, track orders, and provide a seamless experience for both customers and administrators.
 
+![](assets/demo.gif)
+
 ## Features
 
 1. User Registration and Authentication:
